@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 
 from src.Components.data_transformation import DataTransformation
 from src.Components.data_transformation import DataTransformationConfig
+from model_trainer import ModelTrainer, ModelTrainerConfig
 
 
 @dataclass
@@ -32,7 +33,7 @@ class DataInjestion:
         try:
             df = pd.read_csv("src\data\stud.csv")
             logging.info(' Read the dataset as dataframe')
-            
+
             # Spliting data
             train_df, test_df = train_test_split(
                 df, train_size=0.8, random_state=42, shuffle=True)
@@ -74,4 +75,9 @@ if __name__ == '__main__':
     # Transforming data
     data_transformation = DataTransformation()
     train_arr, test_arr, _ = data_transformation.initiate_data_transformation(
-        train_data,test_data)
+        train_data, test_data)
+
+    # Model trainer
+    trainer = ModelTrainer()
+    r2_square = trainer.initiate_model_trainer(train_arr, test_arr)
+    print("R2 score is = ", r2_square)
