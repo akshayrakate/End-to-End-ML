@@ -61,6 +61,7 @@ class DataInjestion:
                 self.injestion_config.test_data_path
 
             )
+
         except Exception as e:
             logging.info('Data spliting issue')
             raise CustomException(e, sys)
